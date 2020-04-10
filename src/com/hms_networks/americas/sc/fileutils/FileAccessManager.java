@@ -24,7 +24,7 @@ public class FileAccessManager {
    * @return file contents
    * @throws IOException if unable to access or read file
    */
-  private static String readFileToString(String filename) throws IOException {
+  public static String readFileToString(String filename) throws IOException {
     // Create input stream and buffered reader
     InputStream inputStream = new FileInputStream(filename);
     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -59,7 +59,7 @@ public class FileAccessManager {
    * @param contents file contents
    * @throws IOException if unable to access or write file
    */
-  private static void writeStringToFile(String filename, String contents) throws IOException {
+  public static void writeStringToFile(String filename, String contents) throws IOException {
     // Create output stream and buffered writer
     OutputStream outputStream = new FileOutputStream(filename);
     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
