@@ -2,6 +2,7 @@ package com.hms_networks.americas.sc.fileutils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,31 +26,39 @@ public class FileAccessManager {
    * @throws IOException if unable to access or read file
    */
   public static String readFileToString(String filename) throws IOException {
-    // Create input stream and buffered reader
-    InputStream inputStream = new FileInputStream(filename);
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+    // If file does not exist, return null
+    File file = new File(filename);
+    String returnVal = null;
 
-    // Create string for file contents
-    StringBuffer fileContents = new StringBuffer();
+    if (file.exists()) {
+      // Create input stream and buffered reader
+      InputStream inputStream = new FileInputStream(filename);
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-    // Loop through file and add to string
-    String currentLine = bufferedReader.readLine();
-    while (currentLine != null) {
-      // Append current line
-      fileContents.append(currentLine);
+      // Create string for file contents
+      StringBuffer fileContents = new StringBuffer();
 
-      // Read next line
-      currentLine = bufferedReader.readLine();
+      // Loop through file and add to string
+      String currentLine = bufferedReader.readLine();
+      while (currentLine != null) {
+        // Append current line
+        fileContents.append(currentLine);
 
-      // If next line exists, add new line to string
-      fileContents.append("\n");
+        // Read next line
+        currentLine = bufferedReader.readLine();
+
+        // If next line exists, add new line to string
+        fileContents.append("\n");
+      }
+
+      // Close reader and stream
+      bufferedReader.close();
+      inputStream.close();
+
+      returnVal = fileContents.toString();
     }
 
-    // Close reader and stream
-    bufferedReader.close();
-    inputStream.close();
-
-    return fileContents.toString();
+    return returnVal;
   }
 
   /**
@@ -60,6 +69,13 @@ public class FileAccessManager {
    * @throws IOException if unable to access or write file
    */
   public static void writeStringToFile(String filename, String contents) throws IOException {
+    // Verify folders exist and file exists
+    File file = new File(filename);
+    file.mkdirs();
+    if (!file.exists()) {
+      file.createNewFile();
+    }
+
     // Create output stream and buffered writer
     OutputStream outputStream = new FileOutputStream(filename);
     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
