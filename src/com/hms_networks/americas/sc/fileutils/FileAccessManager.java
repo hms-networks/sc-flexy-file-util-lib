@@ -48,7 +48,9 @@ public class FileAccessManager {
         currentLine = bufferedReader.readLine();
 
         // If next line exists, add new line to string
-        fileContents.append("\n");
+        if (currentLine != null) {
+          fileContents.append("\n");
+        }
       }
 
       // Close reader and stream
