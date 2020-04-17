@@ -71,7 +71,7 @@ public class FileAccessManager {
   public static void writeStringToFile(String filename, String contents) throws IOException {
     // Verify folders exist and file exists
     File file = new File(filename);
-    file.mkdirs();
+    file.getParentFile().mkdirs();
     if (!file.exists()) {
       file.createNewFile();
     }
