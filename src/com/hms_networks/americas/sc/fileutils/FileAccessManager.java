@@ -64,13 +64,16 @@ public class FileAccessManager {
   }
 
   /**
-   * Writes the specified string to the specified file
+   * Writes the specified string to the specified file, appending or overwriting the existing
+   * content based on the value of <code>append</code>.
    *
    * @param filename file to write to
    * @param contents file contents
+   * @param append boolean indicating if specified contents appended to existing
    * @throws IOException if unable to access or write file
    */
-  public static void writeStringToFile(String filename, String contents) throws IOException {
+  private static void writeStringToFile(String filename, String contents, boolean append)
+      throws IOException {
     // Verify folders exist and file exists
     File file = new File(filename);
     file.getParentFile().mkdirs();
@@ -79,7 +82,7 @@ public class FileAccessManager {
     }
 
     // Create output stream and buffered writer
-    OutputStream outputStream = new FileOutputStream(filename);
+    OutputStream outputStream = new FileOutputStream(filename, append);
     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
 
     // Write contents to file
@@ -88,5 +91,29 @@ public class FileAccessManager {
     // Close writer and stream
     bufferedWriter.close();
     outputStream.close();
+  }
+
+  /**
+   * Writes the specified string to the specified file, overwriting existing contents.
+   *
+   * @param filename file to write to
+   * @param contents file contents
+   * @throws IOException if unable to access or write file
+   */
+  public static void writeStringToFile(String filename, String contents) throws IOException {
+    final boolean appendToExistingFile = false;
+    writeStringToFile(filename, contents, appendToExistingFile);
+  }
+
+  /**
+   * Appends the specified string to the specified file.
+   *
+   * @param filename file to write to
+   * @param contents file contents
+   * @throws IOException if unable to access or write file
+   */
+  public static void appendStringToFile(String filename, String contents) throws IOException {
+    final boolean appendToExistingFile = true;
+    writeStringToFile(filename, contents, appendToExistingFile);
   }
 }
