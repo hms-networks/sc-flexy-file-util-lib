@@ -16,7 +16,7 @@ public class FileManager {
    * @param file file/folder to delete
    * @return true if deleted
    */
-  private static boolean recursivelyDeleteFileFolder(File file) {
+  public static boolean recursivelyDeleteFileFolder(File file) {
     boolean didDelete = false;
     if (file.exists()) {
       if (file.isDirectory()) {
