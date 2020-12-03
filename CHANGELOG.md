@@ -1,5 +1,13 @@
 # Flexy File Utility Library Changelog
 
+## Version 1.2
+### Features
+- Added function for recursive file/folder deletion
+### Bug Fixes
+- N/A
+### Other
+- N/A
+
 ## Version 1.1
 ### Features
 - Added function for appending strings to existing files
