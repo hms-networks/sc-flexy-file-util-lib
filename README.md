@@ -17,7 +17,7 @@ A library of utility classes for accessing, modifying, and working with files on
 
 ## [Developer Documentation](#table-of-contents)
 
-Developer documentation is available in Javadoc format at [https://hms-networks.github.io/sc-flexy-file-util-lib/index.html](https://hms-networks.github.io/sc-flexy-file-util-lib/index.html).
+Developer documentation is available in Javadoc format found in the release package [https://github.com/hms-networks/sc-flexy-file-util-lib/releases](https://github.com/hms-networks/sc-flexy-file-util-lib/releases).
 
 ## [Dependencies](#table-of-contents)
 None
